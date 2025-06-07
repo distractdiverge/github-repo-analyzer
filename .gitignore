@@ -1,3 +1,6 @@
+# Dist JS
+/dist
+
 # Env Config
 .env
 

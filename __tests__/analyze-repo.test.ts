@@ -22,6 +22,7 @@ describe('analyzeRepo', () => {
     };
 
     // Mock the implementation for this test
+    /* TODO: Fix/ Replace this mock 
     (global.mocks.mockCreate as jest.Mock).mockResolvedValueOnce({
       choices: [{
         message: {
@@ -34,6 +35,7 @@ describe('analyzeRepo', () => {
         }
       }]
     });
+    */
 
     const result = await analyzeRepo(mockRepo);
 
