@@ -1,4 +1,4 @@
-import { RepoAnalysis } from '../src/index.js';
+// Ignore for Nowimport { RepoAnalysis } from '../index.ts';
 
 type RepoToDelete = {
   name: string;
@@ -7,6 +7,9 @@ type RepoToDelete = {
   lastUpdated: string;
   createdAt: string;
 };
+
+/*
+Ignore for Now
 
 export const mockRepoAnalysis = (overrides: Partial<RepoAnalysis> = {}): RepoAnalysis => ({
   name: 'test-repo',
@@ -17,6 +20,7 @@ export const mockRepoAnalysis = (overrides: Partial<RepoAnalysis> = {}): RepoAna
   reason: 'Test reason',
   ...overrides
 });
+*/
 
 export const mockRepoToDelete = (overrides: Partial<RepoToDelete> = {}): RepoToDelete => ({
   name: 'test-repo',
