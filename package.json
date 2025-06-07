@@ -7,9 +7,9 @@
     "start": "node dist/index.js",
     "build": "tsc",
     "dev": "NODE_OPTIONS='--loader ts-node/esm' node --loader ts-node/esm src/index.ts",
-    "test": "NODE_OPTIONS=--experimental-vm-modules npx jest",
-    "test:watch": "NODE_OPTIONS=--experimental-vm-modules npx jest --watch",
-    "test:coverage": "NODE_OPTIONS=--experimental-vm-modules npx jest --coverage"
+    "test": "NODE_OPTIONS=--experimental-vm-modules npx jest --no-cache",
+    "test:watch": "NODE_OPTIONS=--experimental-vm-modules npx jest --watch --no-cache",
+    "test:coverage": "NODE_OPTIONS=--experimental-vm-modules npx jest --coverage --no-cache"
   },
   "jest": {
     "preset": "ts-jest/presets/default-esm",
@@ -19,9 +19,12 @@
       "^(\\.{1,2}/.*)\\.js$": "$1"
     },
     "transform": {
-      "^.+\\.tsx?$": ["ts-jest", { "useESM": true }]
+      "^.+\\.tsx?$": ["ts-jest", { "useESM": true, "tsconfig": "tsconfig.json" }]
     },
-    "setupFiles": ["dotenv/config"]
+    "setupFiles": ["dotenv/config"],
+    "setupFilesAfterEnv": ["<rootDir>/__tests__/jest.setup.ts"],
+    "testMatch": ["**/__tests__/**/*.test.ts"],
+    "moduleFileExtensions": ["ts", "js", "json", "node"]
   },
   "keywords": [
     "github",
@@ -29,8 +32,8 @@
     "analyzer",
     "openai"
   ],
-  "author": "",
-  "license": "ISC",
+  "author": "Astrid Lapinski <the.astrid.solveig@gmail.com>",
+  "license": "MIT",
   "description": "A tool to analyze and categorize GitHub repositories using OpenAI",
   "dependencies": {
     "@octokit/rest": "^22.0.0",

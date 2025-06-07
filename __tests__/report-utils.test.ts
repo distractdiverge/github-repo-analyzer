@@ -1,5 +1,14 @@
+import { jest } from '@jest/globals';
 import { generateDeletionReport } from '../src/index.js';
 import { mockRepoToDelete } from './test-utils.js';
+
+declare const global: typeof globalThis & {
+  mocks: {
+    mockCreate: jest.Mock;
+    mockListForUser: jest.Mock;
+    mockUpdate: jest.Mock;
+  };
+};
 
 describe('Report Generation', () => {
   describe('generateDeletionReport', () => {

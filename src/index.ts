@@ -51,7 +51,7 @@ type Repository = {
   [key: string]: any; // Allow other properties
 };
 
-async function analyzeRepo(repo: Repository): Promise<RepoAnalysis> {
+export async function analyzeRepo(repo: Repository): Promise<RepoAnalysis> {
   const name = repo.name || 'unknown';
   const description = repo.description || '';
   
@@ -249,4 +249,8 @@ async function main() {
   }
 }
 
-main();
+// Only execute main function when run directly, not when imported
+if (process.env.NODE_ENV === 'main') {
+  main()
+    .catch(console.error);
+}
