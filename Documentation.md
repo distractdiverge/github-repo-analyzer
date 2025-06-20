@@ -23,7 +23,7 @@ The system is composed of the following core services:
 
 ```mermaid
 graph TD
-    CLI[CLI Entry Point (src/index.ts)] --> AppContext
+    CLI["CLI Entry Point (src/index.ts)"] --> AppContext
     AppContext --> ConfigService
     AppContext --> GitRepoAnalyzer
     AppContext --> ReportService
@@ -39,8 +39,8 @@ graph TD
         ReportService
     end
 
-    GitHubService -- Uses --> OctokitClient[Octokit Client]
-    OpenAIService -- Uses --> OpenAIClient[OpenAI API Client]
+    GitHubService -- Uses --> OctokitClient["Octokit Client"]
+    OpenAIService -- Uses --> OpenAIClient["OpenAI API Client"]
 
     classDef service fill:#f9f,stroke:#333,stroke-width:2px;
     class AppContext,ConfigService,GitHubService,OpenAIService,GitRepoAnalyzer,ReportService service;
