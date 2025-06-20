@@ -75,7 +75,6 @@ The analysis results and any generated reports will be logged to the console, an
 *   `npm run dev`: Runs the application in development mode using `ts-node`.
 *   `npm start`: Executes the compiled JavaScript code from the `dist` directory.
 *   `npm run build`: Compiles the TypeScript source code to JavaScript.
-*   `npm test`: Runs the test suite using Jest.
 
 ## Project Roadmap
 

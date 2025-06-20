@@ -152,23 +152,3 @@
 *   Document the setup ( `.env` file requirements).
 *   Explain how to run the script and build it.
 *   Briefly describe the new service-based architecture once refactored.
-
-# V. Testing
-
-## [TODO] Fix Jest Configuration
-
-*   The test suite is currently failing with a `SyntaxError: Unexpected token 'export'`.
-*   This is caused by an issue with Jest's transformation of ES Modules, particularly in the `__tests__/jest.setup.ts` file.
-*   Investigate the `jest.config.js` (in `package.json`) and `tsconfig.json` to ensure `ts-jest` is correctly configured to handle ESM syntax across all test-related files, including setup files.
-
-## [TODO] Write Unit Tests
-
-*   For `ConfigService`: Test loading and validation of environment variables (mock `process.env`).
-*   For `AnalysisService`: Mock the OpenAI client. Test the prompt generation and response parsing logic. Test different OpenAI response scenarios (valid, invalid, error).
-*   For `GitHubService`: Mock the Octokit client. Test methods like `listUserRepositories`, `getRepositoryContent`, `updateRepositoryDescription` with mock API responses.
-*   For `ReportService`: Test CSV generation and file saving logic (mock `fs/promises`).
-
-## [TODO] Write Integration Tests (Optional but Recommended)
-
-*   Test the interaction between services. For example, a test that uses a mock `GitHubService` and a mock `AnalysisService` to verify the main loop in `src/index.ts`.
-*   You might need a separate test `.env` file or mock environment variables for these.

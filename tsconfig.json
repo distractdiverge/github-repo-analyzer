@@ -14,7 +14,7 @@
     "isolatedModules": true,
     "noEmit": true,
     "sourceMap": true,
-    "types": ["node", "jest", "@jest/globals"],
+    "types": ["node"],
     "baseUrl": ".",
     "paths": {
       "@/*": ["src/*"]
