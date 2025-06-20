@@ -12,8 +12,7 @@
             "skipFiles": [
                 "<node_internals>/**"
             ],
-            "program": "${workspaceFolder}/github-repo-analyzer/src/index.ts",
-            "preLaunchTask": "npm run build",
+            "program": "${workspaceFolder}/src/index.ts",
             "outFiles": [
                 "${workspaceFolder}/**/*.js"
             ]
