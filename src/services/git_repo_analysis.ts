@@ -1,22 +1,17 @@
-import { IGitProvider, GitRepository } from './github_service.js';
-import { ILLMProvider } from './openai_service.js';
+import { DeletionCandidate, IGitProvider, IGitRepoAnalyzer } from './index.js';
 
-/**
- * Represents a repository that is a candidate for deletion, including the reason.
- */
-export interface DeletionCandidate {
-  repo: GitRepository;
-  reason: string;
+export interface IAnalysisOrchestrator {
+    analyzeUserRepositories(): Promise<DeletionCandidate[]>;
 }
 
 /**
  * The main service for analyzing GitHub repositories.
  */
-export class GitRepoAnalyzer {
+export class GitRepoAnalyzer implements IAnalysisOrchestrator {
   private readonly gitProvider: IGitProvider;
-  private readonly llmProvider: ILLMProvider;
+  private readonly llmProvider: IGitRepoAnalyzer;
 
-  constructor(gitProvider: IGitProvider, llmProvider: ILLMProvider) {
+  constructor(gitProvider: IGitProvider, llmProvider: IGitRepoAnalyzer) {
     this.gitProvider = gitProvider;
     this.llmProvider = llmProvider;
   }

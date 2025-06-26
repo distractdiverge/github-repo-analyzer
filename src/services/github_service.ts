@@ -1,42 +1,5 @@
 import { Octokit } from '@octokit/rest';
-import { AppConfig } from './config.js';
-
-/**
- * Represents a repository returned from the Git provider.
- */
-export interface GitRepository {
-  name: string;
-  description: string | null;
-  html_url: string;
-  updated_at: string | null;
-  created_at: string | null;
-  default_branch?: string;
-}
-
-/**
- * Interface for a Git provider service.
- */
-export interface IGitProvider {
-  /**
-   * Fetches all repositories for the configured user.
-   */
-  getRepositories(): Promise<GitRepository[]>;
-
-  /**
-   * Fetches the content of a file from a repository.
-   * @param repoName The name of the repository.
-   * @param path The path to the file.
-   * @returns The file content as a string, or null if not found.
-   */
-  getFileContent(repoName: string, path: string): Promise<string | null>;
-
-  /**
-   * Updates the description of a repository.
-   * @param repoName The name of the repository.
-   * @param newDescription The new description.
-   */
-  updateRepoDescription(repoName: string, newDescription: string): Promise<void>;
-}
+import { IGitProvider, AppConfig, GitRepository } from './index.js';
 
 /**
  * Implementation of IGitProvider using the GitHub API.

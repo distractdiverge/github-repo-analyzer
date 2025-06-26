@@ -1,35 +1,5 @@
 import dotenv from 'dotenv';
-
-/**
- * Defines the structure for the application's configuration, 
- * holding all necessary environment variables and settings.
- */
-export interface AppConfig {
-    githubUsername: string;
-    githubToken: string;
-    openaiApiKey: string;
-    openaiModel: string;
-}
-
-/**
- * Interface defining the contract for configuration services.
- * This allows for different implementations (e.g., environment variables, JSON files, etc.)
- * to be used interchangeably.
- */
-export interface IConfigService {
-    /**
-     * Loads configuration from the source.
-     * This method should be called before any other methods.
-     */
-    load(): void;
-    
-    /**
-     * Retrieves the application configuration.
-     * @returns {AppConfig} The application configuration.
-     * @throws {Error} If required configuration values are missing or invalid.
-     */
-    getConfig(): AppConfig;
-}
+import { IConfigService, AppConfig } from './index.js';
 
 /**
  * Implementation of IConfigService that loads configuration from environment variables
@@ -93,4 +63,4 @@ export class DotEnvConfigService implements IConfigService {
 }
 
 // Default export for the configuration service
-export const configService: IConfigService = new DotEnvConfigService();
+export default DotEnvConfigService;

@@ -1,18 +1,7 @@
 import { writeFile } from 'fs/promises';
 import { join } from 'path';
-import { DeletionCandidate } from './git_repo_analysis.js';
+import { IReportService, DeletionCandidate } from './index.js';
 
-/**
- * Interface for a reporting service.
- */
-export interface IReportService {
-  /**
-   * Generates and saves a report of deletion candidates.
-   * @param candidates The list of candidates to include in the report.
-   * @param filename The base name for the report file.
-   */
-  generateDeletionReport(candidates: DeletionCandidate[], filename: string): Promise<void>;
-}
 
 /**
  * Implementation of IReportService that creates CSV reports.

@@ -5,41 +5,6 @@
 *   In `src/index.ts`, you recently removed the `if (require.main === module)` block. If `src/index.ts` is intended to be run directly as a script, re-implement a robust check. The previous suggestion `if (import.meta.url === \`file://${process.argv[1]}\`)` is a good option for ES modules.
 *   If it's only meant to be imported, ensure no top-level execution of `main()` happens automatically.
 
-## [TODO] Complete `src/services/config.ts`
-
-*   The current `load_config` function just calls `dotenv.config()`. This is already done at the top of `src/index.ts`.
-*   Decide on the role of this service. It could centralize access to all environment variables and configurations, potentially validating them and providing typed access.
-*   **Example:**
-    ```typescript
-    // src/services/config.ts
-    import dotenv from 'dotenv';
-
-    dotenv.config();
-
-    export interface AppConfig {
-      githubUsername: string;
-      githubToken: string;
-      openaiApiKey: string;
-      openaiModel: string;
-    }
-
-    export function getConfig(): AppConfig {
-      const GITHUB_USERNAME = process.env.GITHUB_USERNAME;
-      const GITHUB_TOKEN = process.env.GITHUB_TOKEN; // Added for completeness
-      const OPENAI_API_KEY = process.env.OPENAI_API_KEY; // Added for completeness
-
-      if (!GITHUB_USERNAME || !GITHUB_TOKEN || !OPENAI_API_KEY) {
-        throw new Error('Missing required environment variables: GITHUB_USERNAME, GITHUB_TOKEN, OPENAI_API_KEY');
-      }
-      return {
-        githubUsername: GITHUB_USERNAME,
-        githubToken: GITHUB_TOKEN,
-        openaiApiKey: OPENAI_API_KEY,
-        openaiModel: process.env.OPENAI_MODEL || 'gpt-3.5-turbo',
-      };
-    }
-    ```
-*   Update `src/index.ts` to use this service for configuration.
 
 # II. Refactoring for Testability & Maintainability (Your Key Request)
 

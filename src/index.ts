@@ -1,8 +1,9 @@
-import { IConfigService, AppConfig, DotEnvConfigService } from './services/config.js';
-import { GitHubService, IGitProvider } from './services/github_service.js';
-import { OpenAIService, ILLMProvider } from './services/openai_service.js';
+import { AppConfig, IConfigService, IGitProvider, IGitRepoAnalyzer, IReportService } from './services/index.js';
+import { GitHubService } from './services/github_service.js';
+import { OpenAIRepoAnalyzer  } from './services/openai_service.js';
 import { GitRepoAnalyzer } from './services/git_repo_analysis.js';
-import { ReportService, IReportService } from './services/report_service.js';
+import { ReportService } from './services/report_service.js';
+import { DotEnvConfigService } from './services/dot_env_config.js';
 
 /**
  * Main application context that holds all service instances.
@@ -10,7 +11,7 @@ import { ReportService, IReportService } from './services/report_service.js';
 export class AppContext {
   public readonly config: AppConfig;
   public readonly gitHubService: IGitProvider;
-  public readonly openAIService: ILLMProvider;
+  public readonly openAIService: IGitRepoAnalyzer;
   public readonly reportService: IReportService;
   public readonly analyzer: GitRepoAnalyzer;
 
@@ -21,7 +22,7 @@ export class AppContext {
     
     // Initialize services
     this.gitHubService = new GitHubService(this.config);
-    this.openAIService = new OpenAIService(this.config);
+    this.openAIService = new OpenAIRepoAnalyzer(this.config);
     this.reportService = new ReportService();
     this.analyzer = new GitRepoAnalyzer(this.gitHubService, this.openAIService);
     

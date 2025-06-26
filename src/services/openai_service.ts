@@ -1,34 +1,10 @@
 import OpenAI from 'openai';
-import { AppConfig } from './config.js';
-import { GitRepository } from './github_service.js';
-
-/**
- * Represents the analysis result for a single repository.
- */
-export interface RepoAnalysis {
-  category: string;
-  tags: string[];
-  shouldKeep: boolean;
-  reason: string;
-}
-
-/**
- * Interface for a Language Model (LLM) provider.
- */
-export interface ILLMProvider {
-  /**
-   * Analyzes a repository and returns an analysis.
-   * @param repo The repository to analyze.
-   * @param readmeContent The content of the repository's README file.
-   * @returns A RepoAnalysis object.
-   */
-  analyze(repo: GitRepository, readmeContent: string): Promise<RepoAnalysis>;
-}
+import { IGitRepoAnalyzer, AppConfig, GitRepository, GitRepoAnalysisResponse } from './index.js';
 
 /**
  * Implementation of ILLMProvider using the OpenAI API.
  */
-export class OpenAIService implements ILLMProvider {
+export class OpenAIRepoAnalyzer implements IGitRepoAnalyzer {
   private readonly openai: OpenAI;
   private readonly config: AppConfig;
 
@@ -37,8 +13,9 @@ export class OpenAIService implements ILLMProvider {
     this.openai = new OpenAI({ apiKey: config.openaiApiKey });
   }
 
-  async analyze(repo: GitRepository, readmeContent: string): Promise<RepoAnalysis> {
+  async analyze(repo: GitRepository, readmeContent: string): Promise<GitRepoAnalysisResponse> {
     try {
+      // TODO: Actually create an interfacce around the openai interaction here, not the way it is now
       const response = await this.openai.chat.completions.create({
         model: this.config.openaiModel,
         messages: [
