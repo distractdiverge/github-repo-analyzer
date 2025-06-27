@@ -116,3 +116,6 @@ export interface IReportService {
     generateDeletionReport(candidates: DeletionCandidate[], filename: string): Promise<void>;
   }
   
+export interface ILLMProvider {
+  chat(repo: GitRepository, readmeContent: string): Promise<string | Error | null>;
+}
