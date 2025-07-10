@@ -1,0 +1,38 @@
+name: Run Tests
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  test:
+    name: Run Tests
+    runs-on: ubuntu-latest
+    
+    strategy:
+      matrix:
+        node-version: [22.x]
+
+    steps:
+    - uses: actions/checkout@v4
+    
+    - name: Use Node.js ${{ matrix.node-version }}
+      uses: actions/setup-node@v4
+      with:
+        node-version: ${{ matrix.node-version }}
+        cache: 'npm'
+    
+    - name: Install Dependencies
+      run: npm ci
+    
+    - name: Run Tests
+      run: npm test
+      env:
+        CI: true
+        # Add any required environment variables here
+        # These can be set as GitHub Secrets if they contain sensitive data
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        # Example of using a secret:
+        # OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
