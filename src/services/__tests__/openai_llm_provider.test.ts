@@ -181,7 +181,7 @@ describe('OpenAILLMProvider', () => {
 
       const result = await openaiLLMProvider.chat(mockRepo, mockReadmeContent);
 
-      expect(result).toBeUndefined();
+      expect(result).toBeNull();
     });
   });
 });

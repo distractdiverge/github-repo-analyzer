@@ -11,16 +11,17 @@ export default class OpenAILLMProvider implements ILLMProvider {
     }
     
     public async chat(repo: GitRepository, readmeContent: string): Promise<string | Error | null> {
-       const response = await this.openai.chat.completions.create({
-              model: this.config.openaiModel,
-              messages: [
-                {
-                  role: 'system',
-                  content: 'You are a GitHub repository analyzer. Analyze repositories and provide categorization and recommendations.'
-                },
-                {
-                  role: 'user',
-                  content: `Analyze this GitHub repository:
+        try {
+            const response = await this.openai.chat.completions.create({
+                model: this.config.openaiModel,
+                messages: [
+                    {
+                        role: 'system',
+                        content: 'You are a GitHub repository analyzer. Analyze repositories and provide categorization and recommendations.'
+                    },
+                    {
+                        role: 'user',
+                        content: `Analyze this GitHub repository:
                   Name: ${repo.name}
                   Description: ${repo.description || ''}
                   README: ${readmeContent}
@@ -35,16 +36,14 @@ export default class OpenAILLMProvider implements ILLMProvider {
                     "shouldKeep": true/false,
                     "reason": "[reason for keeping/deleting]"
                   }`
-                }
-              ]
+                    }
+                ]
             });
-      
-            const content = response.choices[0]?.message?.content;
-            return content;
-
-          } catch (error: any) {
-            console.error(`Failed to analyze repository:`, error);
+            
+            return response.choices[0]?.message?.content || null;
+        } catch (error: any) {
+            console.error('Failed to analyze repository:', error);
             return error;
-          }
+        }
     }
-   
+}
