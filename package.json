@@ -13,7 +13,10 @@
   "scripts": {
     "start": "node dist/index.js",
     "build": "tsc",
-    "dev": "NODE_OPTIONS='--loader ts-node/esm' node --loader ts-node/esm src/index.ts"
+    "dev": "NODE_OPTIONS='--loader ts-node/esm' node --loader ts-node/esm src/index.ts",
+    "test": "jest",
+    "test:watch": "jest --watch",
+    "test:coverage": "jest --coverage"
   },
   "keywords": [
     "github",
@@ -30,7 +33,10 @@
     "openai": "^4.12.1"
   },
   "devDependencies": {
+    "@types/jest": "^30.0.0",
     "@types/node": "^22.15.30",
+    "jest": "^30.0.4",
+    "ts-jest": "^29.4.0",
     "ts-node": "^10.9.2",
     "typescript": "^5.8.3"
   }
