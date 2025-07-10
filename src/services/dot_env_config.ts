@@ -11,9 +11,8 @@ export class DotEnvConfigService implements IConfigService {
 
     /**
      * Creates a new instance of DotEnvConfigService.
-     * @param envPath - Optional path to the .env file. Defaults to '.env' in the current working directory.
      */
-    constructor(private readonly envPath?: string) {}
+    constructor() {}
 
     /**
      * Loads environment variables from a .env file into process.env.
@@ -24,7 +23,7 @@ export class DotEnvConfigService implements IConfigService {
             return; // Prevent multiple loads
         }
         
-        dotenv.config(this.envPath ? { path: this.envPath } : undefined);
+        dotenv.config();
         this.isLoaded = true;
     }
 

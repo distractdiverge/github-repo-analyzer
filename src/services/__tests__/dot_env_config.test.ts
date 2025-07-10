@@ -30,16 +30,7 @@ describe('DotEnvConfigService', () => {
     it('should load environment variables from .env file', () => {
       configService.load();
       
-      expect(dotenv.config).toHaveBeenCalledWith(undefined);
-    });
-
-    it('should load environment variables from custom path', () => {
-      const customPath = '/custom/path/.env';
-      const customConfigService = new DotEnvConfigService(customPath);
-      
-      customConfigService.load();
-      
-      expect(dotenv.config).toHaveBeenCalledWith({ path: customPath });
+      expect(dotenv.config).toHaveBeenCalled();
     });
 
     it('should prevent multiple loads', () => {
